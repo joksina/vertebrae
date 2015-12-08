@@ -49,8 +49,7 @@ var renderSomethingOnThePage = function(message) {
 };
 
 // Let's try it out:
-renderSomethingOnThePage(
-  'This is an example of how to use our rendering method.');
+renderSomethingOnThePage('This is an example of how to use our rendering method.');
 
 /* Here are a few more examples. Every call to our rendering function (above)
  * will draw something to the page using the template defined in that function:
@@ -74,7 +73,7 @@ renderSomethingOnThePage(
  * This time, we will see what you might want to extend the model with.
  *
  * _Confused about what `extend` means or does? This is all about the prototype
- * and inhertance. If you're stuck, halp yourself a teacher to explain._
+ * and inhertance. If you're stuck, help yourself a teacher to explain._
  */
 var Message = Backbone.Model.extend({  
   /* Our messages should have two methods that someone could call.
@@ -101,7 +100,10 @@ var Message = Backbone.Model.extend({
      * Putting it into the initialize function let's us be sure that
      * all models that are created will have event listeners on them.
      */
-    this.on(YOUR CODE HERE);
+    this.on("change", function(e){
+      console.log(e.attributes.message)
+      renderSomethingOnThePage(e.attributes.message);
+    });
     /* It is your turn to write the event handler.
      *
      * Make an event listener that will listen for a `change` in this model's
@@ -113,6 +115,7 @@ var Message = Backbone.Model.extend({
      * previous exercise.
      */
   },
+
 
   /* This second method is specifically useful for this message.
    * In the future we will need to be able to alert the message on our model
@@ -134,14 +137,14 @@ var Message = Backbone.Model.extend({
  *
  * Try it yourself, then check out the answer at the bottom of this script.
  */
-
-
+// myNewMessage.get(alertThi
 // Let's try it out: 'instantiate' an instance of the class defined above:
 var myNewMessage = new Message();
-
+// console.log(myNewMessage)
 // ...and then make a change on that model to see it render
 myNewMessage.set({message: 'someMessage'});
-
+myNewMessage.set({message: 'hello new message'})
+myNewMessage.alertThisMessage()
 
 /* Once the model is rendering on the `change` event, move on to step 3!
  *
